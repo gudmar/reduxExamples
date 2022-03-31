@@ -1,0 +1,32 @@
+.wrapper {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.saleItems {
+    width: 200px;
+    height: 4rem;
+    overflow-y: auto;
+}
+
+.salesItem {
+    border: solid thin black;
+    border-radius: 3px;
+    padding: 3px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.selectedSalesItem {
+    width: 300px;
+}
+
+.h3{
+    text-align: center;
+}
