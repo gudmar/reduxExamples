@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
@@ -7,6 +7,7 @@ import Tasks from './features/task/Tasks'
 import Center from './features/center/center';
 import OldCounter from './features/oldCounter/oldCounter';
 import OldTasks from './features/oldTasks/OldTasks';
+import ShoppingChart from './features/shoppingChart_subscribe/shoppingChart'
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -15,6 +16,58 @@ import { oldStore, rootReducer } from './app/oldStore'
 
 console.log(store.getState());
 console.log(oldStore.getState());
+
+function logStoreToConsole(store){
+  console.log(store.getState())
+}
+
+function LogStore({store}){
+
+  return (
+    <button 
+      onClick={() => logStoreToConsole(store)}
+      styel = {{display: ''}}
+    >
+      Log store
+    </button>
+  )
+}
+
+function RemoveMe(props) {
+  const children = props.children
+  const [showChildren, setShowChildren] = useState(true);
+  const removeChildren = () => setShowChildren(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const showTooltipHandler = () => setShowTooltip(true);
+  const hideTooltipHandler = () => setShowTooltip(false);
+  return (
+    <div className="remove-wrapper">
+      {showChildren && 
+      <div  style={{border: 'solid thin gray'}}>
+        <button 
+          onClick={removeChildren}
+          style={{float: 'right', margin: '0.5rem', cursor:'pointer'}}
+          onMouseEnter = {showTooltipHandler}
+          onMouseLeave = {hideTooltipHandler}
+        >
+          &times;
+          {showTooltip && 
+            <div 
+              style={{position: 'absolute', right: '3rem'}}
+            >
+              Remove component
+            </div>
+          }
+        </button>
+        <Center>
+          
+          {children}
+        </Center>
+      </div>
+      }
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -86,6 +139,7 @@ function App() {
     <Provider store = {store}>
       <div className="column">
         <h2>With toolkit</h2>
+        <Center><LogStore store = {store} /></Center>
         <Center>
           <MyCounter />
         </Center>
@@ -99,12 +153,20 @@ function App() {
   <Provider store = {oldStore}>
       <div className="column" store={oldStore}>
       <h2>No toolkit</h2>
+      <Center>
+        <LogStore store = {oldStore} />
+      </Center>
         <Center>
           <OldCounter />
         </Center>
         <Center>
           <OldTasks />
         </Center>
+        <RemoveMe>
+          <Center>
+            <ShoppingChart />
+          </Center>
+        </RemoveMe>
       </div>
     </Provider>
 
