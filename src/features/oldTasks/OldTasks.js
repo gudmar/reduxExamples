@@ -14,12 +14,12 @@ const OldTasks = (props) => {
     const taskBox = useRef();
     const dispatch = props.dispatch;
     
-    const addTask = (payload) => dispatch(add(payload))
+    const addTask = (payload) => {let result = dispatch(add(payload)); console.log('dispatch result', result)}
     const remTask = (payload) => dispatch(remove(payload))
     const remLastTask = () => dispatch(removeLast())
     const removeNthTask = (taskNumber) => { console.log(taskNumber); return remTask(taskNumber);}
 
-    useEffect(()=>{console.log(oldStore.getState())})
+    // useEffect(()=>{console.log(oldStore.getState())})
 
     const [currentText, setCurrnetText] = useState('');
 

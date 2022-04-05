@@ -7,15 +7,13 @@ import Tasks from './features/task/Tasks'
 import Center from './features/center/center';
 import OldCounter from './features/oldCounter/oldCounter';
 import OldTasks from './features/oldTasks/OldTasks';
+import Message from './features/message/Message';
 import ShoppingChart from './features/shoppingChart_subscribe/shoppingChart'
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import  store  from './app/store';
 import { oldStore, rootReducer } from './app/oldStore'
-
-console.log(store.getState());
-console.log(oldStore.getState());
 
 function logStoreToConsole(store){
   console.log(store.getState())
@@ -145,6 +143,9 @@ function App() {
         </Center>
         <Center>
           <Tasks />
+        </Center>
+        <Center>
+          <Message />
         </Center>
       </div>
     </Provider>
